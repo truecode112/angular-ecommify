@@ -1,0 +1,224 @@
+
+
+<div class="inte-form-main">
+  <div class="sidebar">
+    <div class="text-3xl font-extrabold tracking-tight">
+      Integration Form
+    </div>
+    <ul>
+      <li (click)="click_main_tab('endpoints')">
+        Endpoints
+      </li>
+      <li (click)="click_main_tab('connection')">
+        Connection
+      </li>
+      <!-- Products -->
+      <li *ngFor="let item of myObj.sync_options" (click)="click_sync_option(item)" [class.active]="item.label == side_active_tab" class="flex justify-between gap-5 items-center">
+        <p>{{item.label}}</p>
+        <svg (click)="delete_item(item)" width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M1 16C1 17.1 1.9 18 3 18H11C12.1 18 13 17.1 13 16V6C13 4.9 12.1 4 11 4H3C1.9 4 1 4.9 1 6V16ZM4 6H10C10.55 6 11 6.45 11 7V15C11 15.55 10.55 16 10 16H4C3.45 16 3 15.55 3 15V7C3 6.45 3.45 6 4 6ZM10.5 1L9.79 0.29C9.61 0.11 9.35 0 9.09 0H4.91C4.65 0 4.39 0.11 4.21 0.29L3.5 1H1C0.45 1 0 1.45 0 2C0 2.55 0.45 3 1 3H13C13.55 3 14 2.55 14 2C14 1.45 13.55 1 13 1H10.5Z"
+            fill="#DE3A3A" />
+        </svg>
+      </li>
+    </ul>
+    <!-- Add Sync Option -->
+    <div class="syncBtn">
+      <button (click)="openDialog()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_706_3629)">
+            <path
+              d="M18 13H13V18C13 18.55 12.55 19 12 19C11.45 19 11 18.55 11 18V13H6C5.45 13 5 12.55 5 12C5 11.45 5.45 11 6 11H11V6C11 5.45 11.45 5 12 5C12.55 5 13 5.45 13 6V11H18C18.55 11 19 11.45 19 12C19 12.55 18.55 13 18 13Z"
+              fill="#1E293B" />
+          </g>
+          <defs>
+            <clipPath id="clip0_706_3629">
+              <rect width="24" height="24" fill="white" />
+            </clipPath>
+          </defs>
+        </svg>
+
+        Add Sync Option
+      </button>
+    </div>
+  </div>
+  <div class="content">
+    <!-- Products -->
+    <mat-form-field class="w-full mb-4">
+      <input matInput [formControlName]="'company_name'" value="{{side_item}}" />
+      <mat-error>Products name is required</mat-error>
+    </mat-form-field>
+    <!-- Configure -->
+    <mat-form-field class="w-full mb-4">
+      <input matInput [formControlName]="'company_name'"
+        value="{{side_item_des}}" />
+      <mat-error>Products name is required</mat-error>
+    </mat-form-field>
+
+    <!-- Feed -->
+    <div class="feedtab">
+      <button [class.active]="my_items.label == active_tab" *ngFor="let my_items of tab_item"  mat-flat-button color="primary" class="rounded-full sub_tab_btn" (click)="set_active_tab(my_items)">
+        {{my_items.label}}
+        <div class="ml-2">
+          <svg width="4" height="14" viewBox="0 0 4 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M2.00004 3.66671C2.91671 3.66671 3.66671 2.91671 3.66671 2.00004C3.66671 1.08337 2.91671 0.333374 2.00004 0.333374C1.08337 0.333374 0.333374 1.08337 0.333374 2.00004C0.333374 2.91671 1.08337 3.66671 2.00004 3.66671ZM2.00004 5.33337C1.08337 5.33337 0.333374 6.08337 0.333374 7.00004C0.333374 7.91671 1.08337 8.66671 2.00004 8.66671C2.91671 8.66671 3.66671 7.91671 3.66671 7.00004C3.66671 6.08337 2.91671 5.33337 2.00004 5.33337ZM2.00004 10.3334C1.08337 10.3334 0.333374 11.0834 0.333374 12C0.333374 12.9167 1.08337 13.6667 2.00004 13.6667C2.91671 13.6667 3.66671 12.9167 3.66671 12C3.66671 11.0834 2.91671 10.3334 2.00004 10.3334Z"
+               />
+          </svg>
+        </div>
+      </button>
+      
+      <button mat-flat-button color="primary" *ngIf="(side_item != 'endpoints') && (side_item != 'connection')" (click)="add_tab_item()"
+        class="rounded-full bg-transparent border-dashed border-[#94A3B8] border-[1px] text-[#94A3B8]">
+        <div class="mr-2">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M11 6.83329H6.83329V11C6.83329 11.4583 6.45829 11.8333 5.99996 11.8333C5.54163 11.8333 5.16663 11.4583 5.16663 11V6.83329H0.999959C0.541626 6.83329 0.166626 6.45829 0.166626 5.99996C0.166626 5.54163 0.541626 5.16663 0.999959 5.16663H5.16663V0.999959C5.16663 0.541626 5.54163 0.166626 5.99996 0.166626C6.45829 0.166626 6.83329 0.541626 6.83329 0.999959V5.16663H11C11.4583 5.16663 11.8333 5.54163 11.8333 5.99996C11.8333 6.45829 11.4583 6.83329 11 6.83329Z"
+              fill="#64748B" />
+          </svg>
+        </div>
+        Add Tab
+      </button>
+    </div>
+
+    <mat-card>
+      <div class="card-header">
+        <h5 class="text-xl font-semibold tracking-tight">Fields</h5>
+        <button mat-flat-button color="primary">Add Field</button>
+      </div>
+      <mat-card-content>
+
+        <form [formGroup]="myform" (submit)="submitform()">
+          <div class="table-responsive">
+            <table class="table-auto">
+              <thead>
+                <tr>
+                  <th>code</th>
+                  <th>label</th>
+                  <th>description</th>
+                  <th>type</th>
+                  <th>Required</th>
+                  <th>Validated</th>
+                  <th>Hidden</th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>
+                    <div class="flex justify-center items-center gap-2">
+                      <mat-checkbox class="example-margin"></mat-checkbox>
+                      <mat-form-field class="w-full">
+                        <input matInput value="customer_option" (keyup)="get_cus_code($event)" />
+                      </mat-form-field>
+                    </div>
+                  </th>
+                  <th>
+                    <div class="flex justify-center items-center gap-2">
+                      <mat-form-field class="w-full">
+                        <input matInput value="Customer Option" (keyup)="get_cus_label($event)" />
+                      </mat-form-field>
+                    </div>
+                  </th>
+                  <th class="th-2">
+                    <div class="flex justify-center items-center gap-2">
+                      <mat-form-field class="w-full">
+                        <input matInput value="NA" (keyup)="get_cus_description($event)" />
+                      </mat-form-field>
+                    </div>
+                  </th>
+                  <th class="th-4">
+                    <div class="flex justify-center items-center gap-2">
+                      <div class="custom-select-box w-full">
+                        <mat-form-field class="w-full">
+                          <mat-select (valueChange)="get_type($event)" [value]="'option'">
+                            <mat-option value="option">Option </mat-option>
+                            <mat-option value="CUSTOMER_OPTIONS">CUSTOMER_OPTIONS </mat-option>
+                            <mat-option value="PRICE_GROUPS">PRICE_GROUPS </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </th>
+                  <th class="th-5">
+                    <div class="flex items-center gap-2">
+                      <mat-slide-toggle color="primary" (change)="sliderequired($event)" [checked]="true"></mat-slide-toggle>
+                    </div>
+                  </th>
+                  <th class="th-6">
+                    <div class="flex items-center gap-2">
+                      <mat-slide-toggle color="primary" (change)="slidevalidate($event)" [checked]="true"></mat-slide-toggle>
+                    </div>
+                  </th>
+                  <th class="th-7">
+                    <div class="flex items-center gap-2">
+                      <mat-slide-toggle (change)="slidehidden($event)" color="primary" [checked]="true"></mat-slide-toggle>
+                    </div>
+                  </th>
+                  <th class="th-8">
+                    &nbsp;&nbsp;&nbsp;&nbsp;<button class="btn-2  icon-24" mat-raised-button color="primary">
+                      <mat-icon class="icon" fontIcon="edit"></mat-icon>
+                    </button>
+                  </th>
+                  <th class="th-8">
+                    &nbsp;&nbsp;&nbsp;&nbsp;<button class="btn-2 icon-24" mat-raised-button color="light">
+                      <mat-icon class="icon" fontIcon="delete"></mat-icon>
+                    </button>
+                  </th>
+                </tr>
+                <tr>
+                  <th> value option type</th>
+                  <th> value option label</th>
+                  <th> value list origin</th>
+                  <th> value list</th>
+                  <th> value type</th>
+                  <th> is child</th>
+                  <th> edit</th>
+                </tr>
+                <tr>
+                  <td> <input class="myinput" type="text" formControlName="value_opt_type" placeholder="value list"></td>
+                  <td> <input class="myinput" type="text" formControlName="value_opt_label" placeholder="value"></td>
+                  <td> <input class="myinput" type="text" formControlName="value_list_origin" placeholder="source"></td>
+                  <td> <input class="myinput" type="text" formControlName="value_list" placeholder="customer option"></td>
+                  <td> <input class="myinput" type="text" formControlName="value_type" placeholder="static"></td>
+                  <td>
+                    <div class="flex items-center gap-2">
+                    <mat-slide-toggle color="primary" [checked]="true"></mat-slide-toggle>
+                  </div>
+                </td>
+                <td>
+                  <mat-icon class="icon" fontIcon="edit"></mat-icon>
+                </td>
+                </tr>
+
+                <!-- Nested Table start -->
+                <tr colspan="9">
+                </tr>
+                <!-- Nested Table end -->
+              </tbody>
+            </table>
+  
+          </div>
+
+          <div class="content-footer">
+            <button mat-stroked-button color="outline">Cancel</button>
+            <button type="submit" mat-flat-button color="primary">Save</button>
+          </div>
+
+        </form>
+
+      </mat-card-content>
+    </mat-card>
+
+    <!-- <div class="content-footer">
+      <button mat-stroked-button color="outline">Cancel</button>
+      <button mat-flat-button color="primary">Save</button>
+    </div> -->
+    <div class="treeview">
+
+    </div>
+  </div>
+
+</div>

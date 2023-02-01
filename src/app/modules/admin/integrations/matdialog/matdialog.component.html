@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Dialog with elements</h1>
+<div mat-dialog-content>
+    <input #myinput class="input" type="text" placeholder="Enter Value">
+</div>
+<div mat-dialog-actions>
+  <button (click)="clodemodel()" mat-button mat-dialog-close>Close</button>
+  <button (click)="savedata(myinput)" mat-button mat-dialog-close>Save</button>
+</div>

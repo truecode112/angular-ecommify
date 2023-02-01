@@ -1,0 +1,18 @@
+
+.input{
+    padding: 5px 15px;
+    width: 75%;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    margin: 10px;
+}
+
+::ng-deep{
+    .cdk-global-overlay-wrapper{
+        justify-content: center !important;
+
+        #cdk-overlay-3{
+            height: 50% !important;
+        }
+    }
+}

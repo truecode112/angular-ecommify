@@ -1,0 +1,18 @@
+image: atlassian/default-image:3
+
+# Workflow Configuration
+
+pipelines:
+  custom:
+    deployment-to-dev:
+      - step:
+          name: Deploy to EC2 Pre Prod
+          deployment: Staging
+          clone:
+            enabled: false
+          script:
+            - pipe: atlassian/ssh-run:0.4.1
+              variables:
+                SSH_USER: 'bitbucket'
+                SERVER: 'pre-prod.ecommify.io'
+                COMMAND: 'rm -Rf ecommify; git clone git@bitbucket.org:ecommify/ecommify.git; cd ecommify; npm install; export NG_CLI_ANALYTICS=ci; npm run build; cp -Rf dist/ecommify/** /var/www/ecommify/pre-prod/'
