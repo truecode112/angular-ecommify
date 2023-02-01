@@ -38,7 +38,6 @@ export class IntergrationFormComponent implements OnInit {
 
    }
   
-  
   toggleCollapse(): void {
     this.visible = !this.visible;
   }
